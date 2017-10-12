@@ -12,7 +12,6 @@ class pokeList:
         df = pd.read_csv('dataStuff/Pokemon.csv').fillna('None')
 
         # print(df[['Generation','Total']].mean())
-        # print df.fillna('None'), '\n'
 
         # Getting data frames for each of their respective types.
         dfWater = self.water(df)
@@ -43,6 +42,7 @@ class pokeList:
         # print(pd.merge(dfBug, dfPoison), '\n')
         # print(df[df['Name'] == 'Blissey'], '\n')
         # print(df[df['Name'] == 'Blissey'][['HP','Defense']] * 5, '\n')
+        # print(df[ (df['Type 1'] == 'Water') & (df['HP'] > 70) ], '\n')
 
         # df of ALL Pokemon
         df_gen_stats = self.generationStats(df)
