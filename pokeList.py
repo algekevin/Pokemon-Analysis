@@ -9,7 +9,7 @@ class pokeList:
     def __init__(self):
         pd.set_option('display.width', 1000)
         # pd.set_option('max_rows', 1000)    # Gets rid of the '...' in the rows.
-        df = pd.read_csv('dataStuff/Pokemon.csv').fillna('None')
+        df = pd.read_csv('Pokemon.csv').fillna('None')
 
         # print(df[['Generation','Total']].mean())
 
