@@ -103,9 +103,9 @@ for(i in 1:nrow(df_grass)){
   }
 }
 
-ggplot(rbind(tmp_water, tmp_fire), aes(x = Generation, 
-                 y = Total,
-                 fill = Type.1)) + 
+ggplot(rbind(tmp_water, tmp_fire, tmp_grass), aes(x = Generation, 
+                                                  y = Total,
+                                                  fill = Type.1)) + 
   stat_boxplot(geom="errorbar") +
   geom_boxplot(outlier.shape=21,
                outlier.size=2) + 
