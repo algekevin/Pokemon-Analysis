@@ -2,6 +2,7 @@ library(dplyr) # piping and such
 library(tidyr) # replace_na
 library(ggplot2) 
 library(GLDEX) # which.na
+library(reshape) # melt
 
 # Reading in Data ----
 data <- read.csv("Pokemon.csv", na="None")
@@ -75,13 +76,30 @@ ggplot(df_final, aes(x = Generation,
 
 # + Fire vs Water ----
 # ++ Boxplot ----
-ggplot(df_final, aes(x = Generation, 
-                     y = Total, 
-                     fill = Generation)) + 
+
+tmp_water <- df_water
+for(i in 1:nrow(df_water)){
+  if(df_water[i, "Type.1"] != "Water"){
+    tmp_water[i, "Type.1"] = "Water"
+  }
+}
+
+tmp_fire <- df_fire
+for(i in 1:nrow(df_fire)){
+  if(df_fire[i, "Type.1"] != "Fire"){
+    tmp_fire[i, "Type.1"] = "Fire"
+  }
+}
+
+ggplot(rbind(tmp_water, tmp_fire), aes(x = Generation, 
+                 y = Total,
+                 fill = Type.1)) + 
   stat_boxplot(geom="errorbar") +
   geom_boxplot(outlier.shape=21,
-               outlier.size=3,
-               width=0.15)
+               outlier.size=2) + 
+  labs(title="Water vs. Fire Total Stats by Generation",
+       fill="Type")
+  
 
 # Mega Evolution ----
 # + All ----
