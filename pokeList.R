@@ -29,9 +29,14 @@ df_mega <- data[data$Evolution == "Mega",]
 df_water <- df_final[df_final$Type.1 == "Water" | 
                      df_final$Type.2 == "Water",]
 
-# + Fire DF
+# + Fire DF ----
 df_fire <- df_final[df_final$Type.1 == "Fire" |
                     df_final$Type.2 == "Fire",]
+
+# + Grass DF ----
+df_grass <- df_final[df_final$Type.1 == "Grass" |
+                     df_final$Type.2 == "Grass",]
+
 
 # . . . . . . . ----
 
@@ -74,7 +79,7 @@ ggplot(df_final, aes(x = Generation,
   geom_boxplot(outlier.shape=21,
                outlier.size=3) 
 
-# + Fire vs Water ----
+# + Fire vs Water vs Grass ----
 # ++ Boxplot ----
 
 tmp_water <- df_water
@@ -91,13 +96,20 @@ for(i in 1:nrow(df_fire)){
   }
 }
 
+tmp_grass <- df_grass
+for(i in 1:nrow(df_grass)){
+  if(df_grass[i, "Type.1"] != "Grass"){
+    tmp_grass[i, "Type.1"] = "Grass"
+  }
+}
+
 ggplot(rbind(tmp_water, tmp_fire), aes(x = Generation, 
                  y = Total,
                  fill = Type.1)) + 
   stat_boxplot(geom="errorbar") +
   geom_boxplot(outlier.shape=21,
                outlier.size=2) + 
-  labs(title="Water vs. Fire Total Stats by Generation",
+  labs(title="Water vs. Fire vs. Grass Total Stats by Generation",
        fill="Type")
   
 
