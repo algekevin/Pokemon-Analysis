@@ -40,9 +40,10 @@ df_grass <- df_final[df_final$Type.1 == "Grass" |
 
 # . . . . . . . ----
 
-# All pokemon ----
-# + Total Stats ----
-# ++ Boxplot ----
+# Every Pokemon ----
+# + All pokemon ----
+# ++ Total Stats ----
+# +++ Boxplot ----
 
 ggplot(data, aes(x = Generation, 
                  y = Total,
@@ -80,7 +81,8 @@ ggplot(df_final, aes(x = Generation,
                outlier.size=3) 
 
 # + Fire vs Water vs Grass ----
-# ++ Boxplot ----
+# ++ Total Stats ----
+# +++ Boxplot ----
 
 tmp_water <- df_water
 for(i in 1:nrow(df_water)){
@@ -111,7 +113,18 @@ ggplot(rbind(tmp_water, tmp_fire, tmp_grass), aes(x = Generation,
                outlier.size=2) + 
   labs(title="Water vs. Fire vs. Grass Total Stats by Generation",
        fill="Type")
-  
+
+# ++ Attack ----
+# +++ Boxplot ----
+ggplot(rbind(tmp_water, tmp_fire, tmp_grass), aes(x = Generation, 
+                                                  y = Attack,
+                                                  fill = Type.1)) + 
+  stat_boxplot(geom="errorbar") +
+  geom_boxplot(outlier.shape=21,
+               outlier.size=2) + 
+  labs(title="Water vs. Fire vs. Grass Total Stats by Generation",
+       fill="Type")
+
 
 # Mega Evolution ----
 # + All ----
